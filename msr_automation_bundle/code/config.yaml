@@ -1,0 +1,41 @@
+# Configuration for MSR Automation
+column_aliases:
+  ticket_id: [ticketid, ticket_id, number, sys_id, ticket]
+  type: [type, ticket_type, category_type]
+  priority: [priority, prio]
+  state: [state, status]
+  category: [category]
+  subcategory: [subcategory, sub_category]
+  opened_at: [openedat, opened_at, opened, created, created_at]
+  resolved_at: [resolvedat, resolved_at, closed, closed_at, resolved]
+  assignment_group: [assignmentgroup, assignment_group, group]
+  assignee: [assignee, assigned_to, owner]
+  short_description: [shortdescription, short_desc, description, details]
+  root_cause: [rootcause, root_cause, cause]
+  sla_breached: [sla_breached, sla, sla_violation]
+  customer: [customer, business_unit, account]
+
+root_cause_rules:
+  # If no explicit RootCause column or value is missing, infer from short description keywords.
+  Access Request: [access, permission, role, onboarding, offboarding, password]
+  Server Error: [server, reboot, cpu, memory, disk, kernel, os]
+  Network Issue: [vpn, lan, wan, firewall, dns, link, bandwidth]
+  Database Issue: [database, oracle, postgres, mysql, query, lock, backup]
+  Software Bug: [bug, patch, version, mismatch, config, crash]
+  User Education: [how to, inquiry, question, training]
+  Third-Party: [vendor, third-party, external]
+  Monitoring Noise: [alert noise, false alarm, threshold]
+
+output:
+  filename: MSR_Summary.xlsx
+  sheets:
+    - Type
+    - Priority
+    - State
+    - Category
+    - Subcategory
+    - RootCause
+    - AssignmentGroup
+    - Customer
+    - SLA
+  add_charts: false
